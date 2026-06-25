@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import TopHeader from './components/TopHeader';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -10,6 +11,8 @@ import { useState, useEffect } from 'react';
 function App() {
   const [user, setUser] = useState(null);
   const [isDark, setIsDark] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -38,18 +41,38 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-slate-900 text-white' : 'bg-slate-50 text-slate-800'}`}>
-        <Navbar user={user} setUser={setUser} isDark={isDark} toggleTheme={toggleTheme} />
-        <main className="w-full px-6 md:px-12 lg:px-20 py-6">
-          <Routes>
-            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-            <Route path="/login" element={<Login setUser={setUser} />} />
-            <Route path="/register" element={<Register setUser={setUser} />} />
-            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-            <Route path="/board/:id" element={user ? <BoardView /> : <Navigate to="/login" />} />
-            <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/login" />} />
-          </Routes>
-        </main>
+      <div className={`flex h-screen overflow-hidden transition-colors duration-200 ${isDark ? 'dark bg-slate-900 text-white' : 'bg-[#F8F9FC] text-slate-800'}`}>
+        
+        {/* Sidebar only shows when logged in */}
+        {user && <Sidebar user={user} setUser={setUser} isOpen={isSidebarOpen} />}
+        
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
+          
+          {/* TopHeader only shows when logged in */}
+          {user && (
+            <TopHeader 
+              user={user} 
+              isDark={isDark} 
+              toggleTheme={toggleTheme} 
+              searchQuery={searchQuery} 
+              setSearchQuery={setSearchQuery} 
+              toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+            />
+          )}
+
+          {/* Scrollable Page Content */}
+          <main className="flex-1 overflow-y-auto w-full p-8">
+            <Routes>
+              <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+              <Route path="/login" element={<Login setUser={setUser} />} />
+              <Route path="/register" element={<Register setUser={setUser} />} />
+              <Route path="/dashboard" element={user ? <Dashboard searchQuery={searchQuery} /> : <Navigate to="/login" />} />
+              <Route path="/board/:id" element={user ? <BoardView /> : <Navigate to="/login" />} />
+              <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/login" />} />
+            </Routes>
+          </main>
+        </div>
       </div>
     </Router>
   );
