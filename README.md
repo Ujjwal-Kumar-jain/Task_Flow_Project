@@ -61,7 +61,7 @@ Follow these steps to run the application locally on your machine.
 
 ### 1. Clone the repository
 \`\`\`bash
-git clone <your-repo-url>
+git clone <https://github.com/Ujjwal-Kumar-jain/Task_Flow_Project>
 cd Mandul
 \`\`\`
 
@@ -172,8 +172,8 @@ Mandul/
 
 ## 🌐 Live Demo & Test Credentials
 
-- **Frontend URL (Vercel)**: `[Insert Vercel URL here]`
-- **Backend URL (Render)**: `[Insert Render URL here]`
+- **Frontend URL (Vercel)**: `[https://task-flow-project-murex.vercel.app/]`
+- **Backend URL (Render)**: `[https://task-flow-project-natp.onrender.com/api]`
 
 **Test Account Credentials:**
 Feel free to create your own account, or use these test credentials:
