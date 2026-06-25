@@ -65,8 +65,8 @@ function App() {
           <main className="flex-1 overflow-y-auto w-full p-8">
             <Routes>
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-              <Route path="/login" element={<Login setUser={setUser} />} />
-              <Route path="/register" element={<Register setUser={setUser} />} />
+              <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login setUser={setUser} />} />
+              <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register setUser={setUser} />} />
               <Route path="/dashboard" element={user ? <Dashboard searchQuery={searchQuery} /> : <Navigate to="/login" />} />
               <Route path="/board/:id" element={user ? <BoardView /> : <Navigate to="/login" />} />
               <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/login" />} />

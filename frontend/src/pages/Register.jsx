@@ -12,11 +12,9 @@ function Register({ setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post('/auth/register', { name, email, password });
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      setUser(res.data.user);
-      navigate('/dashboard');
+      await api.post('/auth/register', { name, email, password });
+      // Redirect to login page so they can manually log in
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.msg || 'Registration failed');
     }
