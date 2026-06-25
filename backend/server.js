@@ -14,6 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('TaskFlow API is running successfully!');
+});
+
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/boards', require('./routes/boardRoutes'));
 app.use('/api/tasks', require('./routes/taskRoutes'));
