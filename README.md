@@ -142,9 +142,54 @@ Mandul/
 
 ---
 
-## ✨ Future Improvements
-Given more time, I would improve the app by adding:
-1. **Drag-and-Drop functionality** for moving tasks between columns natively.
+## 🔗 API Documentation
+
+### Auth Endpoints
+| Method | Path | Purpose |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Register a new user account |
+| `POST` | `/api/auth/login` | Login and receive a JWT token |
+| `GET` | `/api/auth/me` | Fetch the currently authenticated user's details |
+
+### Board Endpoints (Requires Auth)
+| Method | Path | Purpose |
+| :--- | :--- | :--- |
+| `GET` | `/api/boards` | Get all boards belonging to the logged-in user |
+| `POST` | `/api/boards` | Create a new board |
+| `PUT` | `/api/boards/:id` | Update a board's title/description |
+| `DELETE` | `/api/boards/:id` | Delete a board and all its associated tasks |
+
+### Task Endpoints (Requires Auth)
+| Method | Path | Purpose |
+| :--- | :--- | :--- |
+| `GET` | `/api/tasks` | Get all tasks for the logged-in user (across all boards) |
+| `POST` | `/api/tasks` | Create a new task within a specific board |
+| `PUT` | `/api/tasks/:id` | Update a task (e.g., move it to a different status column) |
+| `DELETE` | `/api/tasks/:id` | Delete a task |
+| `POST` | `/api/tasks/suggest-estimate` | **[AI Feature]** Sends task title/description to Gemini LLM for effort estimation |
+
+---
+
+## 🌐 Live Demo & Test Credentials
+
+- **Frontend URL (Vercel)**: `[Insert Vercel URL here]`
+- **Backend URL (Render)**: `[Insert Render URL here]`
+
+**Test Account Credentials:**
+Feel free to create your own account, or use these test credentials:
+- **Email:** `testuser@example.com`
+- **Password:** `password123`
+
+---
+
+## ⚠️ Known Issues / Limitations & Future Improvements
+
+### Limitations:
+- **Render Cold Starts:** The backend is hosted on Render's free tier, which spins down after inactivity. The very first request (like logging in) may take 30-50 seconds to wake up the server. 
+- **AI Latency:** The AI suggestion relies on the Gemini API. During peak times, the response might take a few seconds to generate.
+
+### What I would improve with more time:
+1. **Drag-and-Drop functionality** for moving tasks between columns natively instead of relying strictly on edit modals.
 2. **Global Task Search** and advanced filtering across all boards.
-3. **Collaboration Features** to share a board with other registered users.
-4. Comprehensive unit and integration testing.
+3. **Collaboration Features** to share a board with other registered users (currently, all boards are strictly private to the creator).
+4. **Comprehensive Test Suite** including unit tests with Jest and E2E testing with Cypress.
