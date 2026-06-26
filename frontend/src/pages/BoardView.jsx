@@ -23,6 +23,9 @@ function BoardView() {
   // Edit Task State
   const [editingTask, setEditingTask] = useState(null);
 
+  // Drag and Drop State
+  const [draggedTask, setDraggedTask] = useState(null);
+
   const fetchBoardAndTasks = async () => {
     try {
       const boardRes = await api.get(`/boards/${id}`);
@@ -71,6 +74,35 @@ function BoardView() {
     } catch (err) {
       console.error('Error updating status', err);
     }
+  };
+
+  const handleDragStart = (e, task) => {
+    setDraggedTask(task);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDrop = async (e, newStatus) => {
+    e.preventDefault();
+    if (!draggedTask) return;
+    
+    if (draggedTask.status === newStatus) {
+      setDraggedTask(null);
+      return;
+    }
+
+    // Optimistic UI Update for smoothness
+    const previousTasks = [...tasks];
+    setTasks(tasks.map(t => t._id === draggedTask._id ? { ...t, status: newStatus } : t));
+    
+    try {
+      await api.put(`/tasks/${draggedTask._id}`, { status: newStatus });
+      // In background, fetch to ensure sync, but UI is already updated
+      fetchBoardAndTasks(); 
+    } catch (err) {
+      console.error('Error updating status via drag', err);
+      setTasks(previousTasks); // Revert on failure
+    }
+    setDraggedTask(null);
   };
 
   const handleSuggestEstimate = async () => {
@@ -253,7 +285,12 @@ function BoardView() {
           const borderColor = col === 'To Do' ? 'border-indigo-400 dark:border-indigo-500' : col === 'In Progress' ? 'border-amber-400 dark:border-amber-500' : 'border-emerald-400 dark:border-emerald-500';
           
           return (
-            <div key={col} className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 min-h-[500px]">
+            <div 
+              key={col} 
+              className={`bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 min-h-[500px] transition-colors ${draggedTask && draggedTask.status !== col ? 'ring-2 ring-dashed ring-indigo-300 dark:ring-indigo-700/50' : ''}`}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => handleDrop(e, col)}
+            >
               <div className={`flex justify-between items-center mb-4 pb-2 border-b-2 ${borderColor}`}>
                 <h3 className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-sm">{col}</h3>
                 <span className="bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">{colTasks.length}</span>
@@ -266,7 +303,12 @@ function BoardView() {
                   </div>
                 ) : (
                   colTasks.map(task => (
-                    <div key={task._id} className="group bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md dark:hover:shadow-black/40 transition-all relative">
+                    <div 
+                      key={task._id} 
+                      className={`group bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md dark:hover:shadow-black/40 transition-all relative cursor-grab active:cursor-grabbing ${draggedTask && draggedTask._id === task._id ? 'opacity-50 scale-95' : 'opacity-100'}`}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, task)}
+                    >
                       
                       {/* Priority Badge */}
                       <div className="flex justify-between items-start mb-3">
