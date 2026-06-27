@@ -8,6 +8,17 @@ What sets TaskFlow apart is its **Smart AI Assist** feature: powered by Google's
 
 ## 📸 Screenshots
 
+### Login & Authentication
+![Login Page](./screenshots/login.png)
+
+### Main Dashboard & Analytics
+![Dashboard](./screenshots/dashboard.png)
+
+### Kanban Board View (Drag & Drop)
+![Board View](./screenshots/board-view.png)
+
+### Responsive Mobile View
+![Mobile View](./screenshots/mobile-view.png)
 
 ---
 
