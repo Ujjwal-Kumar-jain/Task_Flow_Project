@@ -7,12 +7,7 @@ What sets TaskFlow apart is its **Smart AI Assist** feature: powered by Google's
 ---
 
 ## 📸 Screenshots
-*(Add screenshots of your application here before submitting)*
 
-- **Login / Register Page**: `[Screenshot Placeholder]`
-- **Dashboard (Boards View)**: `[Screenshot Placeholder]`
-- **Board View (Kanban)**: `[Screenshot Placeholder]`
-- **Mobile View**: `[Screenshot Placeholder]`
 
 ---
 
@@ -189,7 +184,7 @@ Feel free to create your own account, or use these test credentials:
 - **AI Latency:** The AI suggestion relies on the Gemini API. During peak times, the response might take a few seconds to generate.
 
 ### What I would improve with more time:
-1. **Drag-and-Drop functionality** for moving tasks between columns natively instead of relying strictly on edit modals.
-2. **Global Task Search** and advanced filtering across all boards.
-3. **Collaboration Features** to share a board with other registered users (currently, all boards are strictly private to the creator).
-4. **Comprehensive Test Suite** including unit tests with Jest and E2E testing with Cypress.
+1. **Global Task Search** and advanced filtering across all boards.
+2. **Collaboration Features** to share a board with other registered users (currently, all boards are strictly private to the creator).
+3. **Comprehensive Test Suite** including unit tests with Jest and E2E testing with Cypress.
+4. **Email Reminders** for upcoming task due dates to keep users on track.

@@ -19,7 +19,7 @@ exports.getBoards = async (req, res) => {
 // @access  Private
 exports.createBoard = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, description, category, collaborators } = req.body;
 
         if (!title) {
             return res.status(400).json({ msg: 'Title is required' });
@@ -28,6 +28,8 @@ exports.createBoard = async (req, res) => {
         const newBoard = new Board({
             title,
             description,
+            category: category || 'Project Board',
+            collaborators: collaborators || [],
             owner: req.user.id
         });
 
@@ -67,7 +69,7 @@ exports.getBoardById = async (req, res) => {
 // @access  Private
 exports.updateBoard = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, description, category, collaborators } = req.body;
 
         let board = await Board.findById(req.params.id);
 
@@ -81,6 +83,8 @@ exports.updateBoard = async (req, res) => {
 
         board.title = title || board.title;
         board.description = description !== undefined ? description : board.description;
+        board.category = category !== undefined ? category : board.category;
+        board.collaborators = collaborators !== undefined ? collaborators : board.collaborators;
 
         await board.save();
         res.json(board);

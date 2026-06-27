@@ -20,10 +20,10 @@ function TopHeader({ user, setUser, isDark, toggleTheme, searchQuery, setSearchQ
   ];
 
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40 transition-colors duration-200">
+    <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-between sticky top-0 z-40 transition-colors duration-200">
       
       {/* Left: Logo & Links */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         <div className="relative">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -70,16 +70,16 @@ function TopHeader({ user, setUser, isDark, toggleTheme, searchQuery, setSearchQ
           )}
         </div>
 
-        <Link to="/dashboard" className="flex items-center gap-2">
-          <div className="bg-indigo-500 text-white p-1.5 rounded-lg flex items-center justify-center">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <Link to="/dashboard" className="flex items-center gap-1.5 sm:gap-2">
+          <div className="bg-indigo-500 text-white p-1 sm:p-1.5 rounded-lg flex items-center justify-center">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
           </div>
-          <span className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">TaskFlow</span>
+          <span className="text-lg sm:text-xl font-bold text-slate-800 dark:text-white tracking-tight">TaskFlow</span>
         </Link>
       </div>
 
       {/* Right: Search, Theme, Profile */}
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2 sm:gap-5">
         
         {/* Search */}
         <div className="relative hidden md:block">
@@ -111,7 +111,7 @@ function TopHeader({ user, setUser, isDark, toggleTheme, searchQuery, setSearchQ
         </button>
         
         {/* Profile */}
-        <div className="flex items-center gap-3 pl-5 border-l border-gray-200 dark:border-slate-700">
+        <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-5 border-l border-gray-200 dark:border-slate-700">
           <div className="hidden sm:block text-right">
             <p className="text-sm text-slate-500 dark:text-slate-400">Welcome, <span className="font-bold text-slate-800 dark:text-white">{user?.name}</span> 👋</p>
           </div>
@@ -121,8 +121,9 @@ function TopHeader({ user, setUser, isDark, toggleTheme, searchQuery, setSearchQ
         </div>
 
         {/* Logout */}
-        <button onClick={handleLogout} className="px-4 py-1.5 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg text-sm font-bold transition-colors">
-          Logout
+        <button onClick={handleLogout} className="px-2 sm:px-4 py-1.5 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg text-sm font-bold transition-colors flex items-center justify-center" title="Logout">
+          <svg className="w-4 h-4 sm:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+          <span className="hidden sm:inline">Logout</span>
         </button>
         
       </div>
