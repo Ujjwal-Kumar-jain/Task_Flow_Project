@@ -358,17 +358,8 @@ function Dashboard({ searchQuery }) {
                   )}
                 </Link>
 
-                {/* Footer with Avatars and Menu */}
-                <div className={`${viewMode === 'grid' ? 'px-6 py-4 border-t border-gray-50 dark:border-slate-800/50 flex justify-between' : 'p-4 md:pr-2 flex w-full md:w-auto justify-between border-t border-gray-50 dark:border-0'} items-center bg-white dark:bg-slate-800 z-10 shrink-0 gap-4`}>
-                  <div className="flex -space-x-2 overflow-hidden">
-                    {/* Mocked Collaborators for UI based on screenshot */}
-                    <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-800" src={`https://i.pravatar.cc/150?u=${board._id}1`} alt=""/>
-                    <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-800" src={`https://i.pravatar.cc/150?u=${board._id}2`} alt=""/>
-                    <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-800" src={`https://i.pravatar.cc/150?u=${board._id}3`} alt=""/>
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 ring-2 ring-white dark:ring-slate-800">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400">+{Math.floor(Math.random() * 5) + 1}</span>
-                    </div>
-                  </div>
+                {/* Footer with Menu */}
+                <div className={`${viewMode === 'grid' ? 'px-6 py-4 border-t border-gray-50 dark:border-slate-800/50 flex justify-end' : 'p-4 md:pr-2 flex w-full md:w-auto justify-end border-t border-gray-50 dark:border-0'} items-center bg-white dark:bg-slate-800 z-10 shrink-0 gap-4`}>
                   
                   {/* 3 Dots Menu */}
                   <div className="relative">
