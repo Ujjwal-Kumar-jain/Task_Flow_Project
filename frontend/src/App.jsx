@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
 import TopHeader from './components/TopHeader';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -12,7 +11,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [isDark, setIsDark] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -41,13 +39,9 @@ function App() {
 
   return (
     <Router>
-      <div className={`flex h-screen overflow-hidden transition-colors duration-200 ${isDark ? 'dark bg-slate-900 text-white' : 'bg-[#F8F9FC] text-slate-800'}`}>
+      <div className={`flex flex-col h-screen overflow-hidden transition-colors duration-200 ${isDark ? 'dark bg-slate-900 text-white' : 'bg-[#F8F9FC] text-slate-800'}`}>
         
-        {/* Sidebar only shows when logged in */}
-        {user && <Sidebar user={user} setUser={setUser} isOpen={isSidebarOpen} />}
-        
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
+        {/* Top Navigation Bar */}
           
           {/* TopHeader only shows when logged in */}
           {user && (
@@ -57,7 +51,7 @@ function App() {
               toggleTheme={toggleTheme} 
               searchQuery={searchQuery} 
               setSearchQuery={setSearchQuery} 
-              toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+              setUser={setUser}
             />
           )}
 
@@ -72,7 +66,6 @@ function App() {
               <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/login" />} />
             </Routes>
           </main>
-        </div>
       </div>
     </Router>
   );
