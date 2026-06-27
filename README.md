@@ -6,6 +6,18 @@ What sets TaskFlow apart is its **Smart AI Assist** feature: powered by Google's
 
 ---
 
+## 🌐 Live Demo & Test Credentials
+
+- **Frontend URL (Vercel)**: `[https://task-flow-project-murex.vercel.app/]`
+- **Backend URL (Render)**: `[https://task-flow-project-natp.onrender.com]`
+
+**Test Account Credentials:**
+Feel free to create your own account, or use these test credentials:
+- **Email:** `ujjwal@gmail.com`
+- **Password:** `123456`
+
+---
+
 ## 📸 Screenshots
 
 ### Login & Authentication
@@ -173,18 +185,6 @@ Mandul/
 | `PUT` | `/api/tasks/:id` | Update a task (e.g., move it to a different status column) |
 | `DELETE` | `/api/tasks/:id` | Delete a task |
 | `POST` | `/api/tasks/suggest-estimate` | **[AI Feature]** Sends task title/description to Gemini LLM for effort estimation |
-
----
-
-## 🌐 Live Demo & Test Credentials
-
-- **Frontend URL (Vercel)**: `[https://task-flow-project-murex.vercel.app/]`
-- **Backend URL (Render)**: `[https://task-flow-project-natp.onrender.com/api]`
-
-**Test Account Credentials:**
-Feel free to create your own account, or use these test credentials:
-- **Email:** `testuser@example.com`
-- **Password:** `password123`
 
 ---
 
